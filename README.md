@@ -4,8 +4,6 @@
 
 ## インストール
 
-ワークスペースのパスを$WSと表すことにする．
-
 ```
 sudo apt -y install ros-foxy-gazebo-ros ros-foxy-camera-info-manager
 sudo apt -y install ros-foxy-realsense2-description
@@ -14,7 +12,7 @@ sudo apt -y install ros-foxy-navigation2 ros-foxy-nav2-bringup
 sudo apt -y install ros-foxy-urg-node
 sudo apt -y install ros-foxy-tf-transformations
 
-cd ~/$WS/src
+cd ~/airobot_ws/src
 git clone https://github.com/kobuki-base/kobuki_ros_interfaces
 git clone -b foxy-devel https://github.com/pal-robotics/realsense_gazebo_plugin
 git clone https://github.com/rt-net/crane_plus
@@ -22,7 +20,7 @@ git clone https://github.com/AI-Robot-Book/kobuki_ros_airobotbook
 
 rosdep install -r -y -i --from-paths .
 
-cd ~/$WS/
+cd ~/airobot_ws
 colcon build
 source install/setup.bash
 ```
@@ -30,7 +28,7 @@ source install/setup.bash
 ### デバイスファイルのルールの設定
 
 ```
-sudo cp ~/$WS/src/turtlebot2_airobotbook/rules.d/* /etc/udev/rules.d
+sudo cp ~/airobot_ws/src/turtlebot2_airobotbook/rules.d/* /etc/udev/rules.d
 ```
 KobukiとCRANE+ V2は同じFTDIのドライバを使っているので，個別の機器に合わせたルールの書き換えが必要．うまく設定できれば，以下のようなデバイスファイル（のシンボリックリンク）が作られる．
 
