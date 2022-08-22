@@ -1,0 +1,1 @@
+KERNEL=="ttyUSB*", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="kobuki_AH02B90J",SYMLINK+="ttyUSB_kobuki", MODE="0666"

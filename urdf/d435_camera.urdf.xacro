@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<robot name="d435_camera" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find turtlebot2_airobotbook)/urdf/_d435_camera.urdf.xacro" />
+  
+  <link name="world" />
+
+  <xacro:_d435_camera parent="world" xyz="0 0 0" rpy="0 0 0" />
+
+</robot>

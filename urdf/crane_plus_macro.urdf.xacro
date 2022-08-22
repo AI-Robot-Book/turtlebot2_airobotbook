@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+
+<robot
+    name="crane_plus_macro"
+    xmlns:xacro="http://ros.org/wiki/xacro">
+    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+    xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+    xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+
+  <xacro:include filename="$(find crane_plus_description)/urdf/crane_plus.xacro"/>
+  <xacro:include filename="$(find crane_plus_description)/urdf/crane_plus.ros2_control.xacro"/>
+  <xacro:include filename="$(find crane_plus_description)/urdf/crane_plus.gazebo.xacro"/>
+  <xacro:include filename="$(find crane_plus_description)/urdf/crane_plus.gazebo_ros2_control.xacro"/>
+
+  <xacro:macro name="crane_plus_macro" params="parent xyz rpy use_gazebo">
+    <xacro:arg name="use_gazebo" default="${use_gazebo}" />
+    <xacro:arg name="use_ignition" default="false" />
+    <xacro:arg name="port_name" default="/dev/ttyUSB0" />
+    <xacro:arg name="baudrate" default="1000000" />
+    <xacro:arg name="timeout_seconds" default="5.0" />
+    <xacro:arg name="read_velocities" default="0" />
+    <xacro:arg name="read_loads" default="0" />
+    <xacro:arg name="read_voltages" default="0" />
+    <xacro:arg name="read_temperatures" default="0" />
+  
+    <xacro:property name="NAME_LINK_BASE" value="crane_plus_base"/>
+    <xacro:property name="NAME_LINK_1" value="crane_plus_link1"/>
+    <xacro:property name="NAME_LINK_2" value="crane_plus_link2"/>
+    <xacro:property name="NAME_LINK_3" value="crane_plus_link3"/>
+    <xacro:property name="NAME_LINK_4" value="crane_plus_link4"/>
+    <xacro:property name="NAME_LINK_HAND" value="crane_plus_link_hand"/>
+
+    <xacro:property name="NAME_JOINT_BASE" value="crane_plus_joint_base"/>
+    <xacro:property name="NAME_JOINT_1" value="crane_plus_joint1"/>
+    <xacro:property name="NAME_JOINT_2" value="crane_plus_joint2"/>
+    <xacro:property name="NAME_JOINT_3" value="crane_plus_joint3"/>
+    <xacro:property name="NAME_JOINT_4" value="crane_plus_joint4"/>
+    <xacro:property name="NAME_JOINT_HAND" value="crane_plus_joint_hand"/>
+
+    <xacro:property name="M_PI" value="3.14159"/>
+    <xacro:property name="TO_RADIAN" value="${M_PI / 180.0}"/>
+    <xacro:property name="SERVO_HOME" value="${TO_RADIAN * 150.0}"/>
+    <xacro:property name="JOINT_VELOCITY_LIMIT" value="2.0"/>
+    <xacro:property name="JOINT_1_LOWER_LIMIT" value="${0.0 * TO_RADIAN - SERVO_HOME}"/>
+    <xacro:property name="JOINT_1_UPPER_LIMIT" value="${300.0 * TO_RADIAN - SERVO_HOME}"/>
+    <xacro:property name="JOINT_2_LOWER_LIMIT" value="${45.45 * TO_RADIAN - SERVO_HOME}"/>
+    <xacro:property name="JOINT_2_UPPER_LIMIT" value="${252.20 * TO_RADIAN - SERVO_HOME}"/>
+    <xacro:property name="JOINT_3_LOWER_LIMIT" value="${3.52 * TO_RADIAN - SERVO_HOME}"/>
+    <xacro:property name="JOINT_3_UPPER_LIMIT" value="${290.62 * TO_RADIAN - SERVO_HOME}"/>
+    <xacro:property name="JOINT_4_LOWER_LIMIT" value="${44.57 * TO_RADIAN - SERVO_HOME}"/>
+    <xacro:property name="JOINT_4_UPPER_LIMIT" value="${251.32 * TO_RADIAN - SERVO_HOME}"/>
+    <xacro:property name="JOINT_HAND_LOWER_LIMIT" value="${109.38 * TO_RADIAN - SERVO_HOME}"/>
+    <xacro:property name="JOINT_HAND_UPPER_LIMIT" value="${188.27 * TO_RADIAN - SERVO_HOME}"/>
+
+    <xacro:crane_plus
+      parent="${parent}"
+      name_link_base="${NAME_LINK_BASE}"
+      name_link_1="${NAME_LINK_1}"
+      name_link_2="${NAME_LINK_2}"
+      name_link_3="${NAME_LINK_3}"
+      name_link_4="${NAME_LINK_4}"
+      name_link_hand="${NAME_LINK_HAND}"
+      name_joint_base="${NAME_JOINT_BASE}"
+      name_joint_1="${NAME_JOINT_1}"
+      name_joint_2="${NAME_JOINT_2}"
+      name_joint_3="${NAME_JOINT_3}"
+      name_joint_4="${NAME_JOINT_4}"
+      name_joint_hand="${NAME_JOINT_HAND}"
+
+      joints_vlimit="${JOINT_VELOCITY_LIMIT}"
+      joint_1_lower_limit="${JOINT_1_LOWER_LIMIT}"
+      joint_1_upper_limit="${JOINT_1_UPPER_LIMIT}"
+      joint_2_lower_limit="${JOINT_2_LOWER_LIMIT}"
+      joint_2_upper_limit="${JOINT_2_UPPER_LIMIT}"
+      joint_3_lower_limit="${JOINT_3_LOWER_LIMIT}"
+      joint_3_upper_limit="${JOINT_3_UPPER_LIMIT}"
+      joint_4_lower_limit="${JOINT_4_LOWER_LIMIT}"
+      joint_4_upper_limit="${JOINT_4_UPPER_LIMIT}"
+      joint_hand_lower_limit="${JOINT_HAND_LOWER_LIMIT}"
+      joint_hand_upper_limit="${JOINT_HAND_UPPER_LIMIT}" >
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+    </xacro:crane_plus>
+
+    <xacro:unless value="$(arg use_gazebo)">
+      <xacro:crane_plus_ros2_control_settings 
+        name="crane_plus"
+        name_joint_1="${NAME_JOINT_1}"
+        name_joint_2="${NAME_JOINT_2}"
+        name_joint_3="${NAME_JOINT_3}"
+        name_joint_4="${NAME_JOINT_4}"
+        name_joint_hand="${NAME_JOINT_HAND}"
+        joint_1_lower_limit="${JOINT_1_LOWER_LIMIT}"
+        joint_1_upper_limit="${JOINT_1_UPPER_LIMIT}"
+        joint_2_lower_limit="${JOINT_2_LOWER_LIMIT}"
+        joint_2_upper_limit="${JOINT_2_UPPER_LIMIT}"
+        joint_3_lower_limit="${JOINT_3_LOWER_LIMIT}"
+        joint_3_upper_limit="${JOINT_3_UPPER_LIMIT}"
+        joint_4_lower_limit="${JOINT_4_LOWER_LIMIT}"
+        joint_4_upper_limit="${JOINT_4_UPPER_LIMIT}"
+        joint_hand_lower_limit="${JOINT_HAND_LOWER_LIMIT}"
+        joint_hand_upper_limit="${JOINT_HAND_UPPER_LIMIT}"
+        port_name="$(arg port_name)"
+        baudrate="$(arg baudrate)"
+        timeout_seconds="$(arg timeout_seconds)"
+        read_velocities="$(arg read_velocities)"
+        read_loads="$(arg read_loads)"
+        read_voltages="$(arg read_voltages)"
+        read_temperatures="$(arg read_temperatures)" />
+    </xacro:unless>
+
+    <xacro:if value="$(arg use_gazebo)">
+      <xacro:gazebo_robot_settings
+        name_link_base="${NAME_LINK_BASE}"
+        name_link_1="${NAME_LINK_1}"
+        name_link_2="${NAME_LINK_2}"
+        name_link_3="${NAME_LINK_3}"
+        name_link_4="${NAME_LINK_4}"
+        name_link_hand="${NAME_LINK_HAND}"
+        use_ignition="$(arg use_ignition)" />
+
+      <xacro:crane_plus_gazebo_ros2_control_settings 
+        name="crane_plus"
+        name_joint_1="${NAME_JOINT_1}"
+        name_joint_2="${NAME_JOINT_2}"
+        name_joint_3="${NAME_JOINT_3}"
+        name_joint_4="${NAME_JOINT_4}"
+        name_joint_hand="${NAME_JOINT_HAND}"
+        joint_1_lower_limit="${JOINT_1_LOWER_LIMIT}"
+        joint_1_upper_limit="${JOINT_1_UPPER_LIMIT}"
+        joint_2_lower_limit="${JOINT_2_LOWER_LIMIT}"
+        joint_2_upper_limit="${JOINT_2_UPPER_LIMIT}"
+        joint_3_lower_limit="${JOINT_3_LOWER_LIMIT}"
+        joint_3_upper_limit="${JOINT_3_UPPER_LIMIT}"
+        joint_4_lower_limit="${JOINT_4_LOWER_LIMIT}"
+        joint_4_upper_limit="${JOINT_4_UPPER_LIMIT}"
+        joint_hand_lower_limit="${JOINT_HAND_LOWER_LIMIT}"
+        joint_hand_upper_limit="${JOINT_HAND_UPPER_LIMIT}"
+        use_ignition="$(arg use_ignition)" />
+    </xacro:if>
+  </xacro:macro>
+</robot>

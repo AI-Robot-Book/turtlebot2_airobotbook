@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<robot name="turtlebot2" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="use_gazebo" default="false" />
+
+  <xacro:property name="M_PI" value="3.1415926535897931" />
+
+  <xacro:include filename="$(find kobuki_description)/urdf/kobuki.urdf.xacro" />
+  <xacro:kobuki/>
+
+  <xacro:include filename="$(find turtlebot2_airobotbook)/urdf/hexagons.urdf.xacro"/>
+  <xacro:stack_hexagons parent="base_link"/>
+
+  <xacro:include filename="$(find turtlebot2_airobotbook)/urdf/hokuyo.urdf.xacro" />
+  <xacro:hokuyo_laser xyz="0.105 0.0 0.19" rpy="0 0 0" parent="base_link" />
+
+</robot>

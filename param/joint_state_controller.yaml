@@ -1,0 +1,4 @@
+/joint_state_controller:
+  ros__parameters:
+    use_local_topics: false
+    use_sim_time: true

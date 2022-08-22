@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<robot name="turtlebot2_crane" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:arg name="use_gazebo" default="false" />
+
+  <xacro:property name="M_PI" value="3.1415926535897931" />
+
+  <xacro:include filename="$(find kobuki_description)/urdf/kobuki.urdf.xacro" />
+  <xacro:kobuki/>
+
+  <xacro:include filename="$(find turtlebot2_airobotbook)/urdf/crane_plus_macro.urdf.xacro" />
+  <xacro:crane_plus_macro parent="base_link" xyz="0.08 -0.05 0.40" rpy="0 0 0" use_gazebo="$(arg use_gazebo)"/>
+
+  <xacro:include filename="$(find turtlebot2_airobotbook)/urdf/hexagons.urdf.xacro"/>
+  <xacro:stack_hexagons parent="base_link"/>
+
+  <xacro:include filename="$(find turtlebot2_airobotbook)/urdf/_d435_camera.urdf.xacro" />
+  <xacro:_d435_camera parent="base_link" xyz="-0.06 0 0.75" rpy="0 ${45 * M_PI / 180} 0" />
+
+  <xacro:include filename="$(find turtlebot2_airobotbook)/urdf/hokuyo.urdf.xacro" />
+  <xacro:hokuyo_laser xyz="0.105 0.0 0.19" rpy="0 0 0" parent="base_link" />
+
+</robot>
