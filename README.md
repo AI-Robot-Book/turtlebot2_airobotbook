@@ -11,12 +11,14 @@ sudo apt -y install ros-foxy-diagnostic-updater ros-foxy-ecl-linear-algebra ros-
 sudo apt -y install ros-foxy-navigation2 ros-foxy-nav2-bringup
 sudo apt -y install ros-foxy-urg-node
 sudo apt -y install ros-foxy-tf-transformations
+sudo apt -y install ros-foxy-rqt-robot-steering
 
 cd ~/airobot_ws/src
 git clone https://github.com/kobuki-base/kobuki_ros_interfaces
 git clone -b foxy-devel https://github.com/pal-robotics/realsense_gazebo_plugin
 git clone https://github.com/rt-net/crane_plus
 git clone https://github.com/AI-Robot-Book/kobuki_ros_airobotbook
+git clone https://github.com/AI-Robot-Book/turtlebot2_airobotbook
 
 rosdep install -r -y -i --from-paths .
 
