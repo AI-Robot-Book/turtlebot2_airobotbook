@@ -1,4 +1,4 @@
-# AIロボット入門のためのTurtlebot2モデル
+# 「ROS2とPythonで作って学ぶAIロボット入門」のためのTurtlebot2モデル
 
 ## 概要
 
