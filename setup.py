@@ -21,7 +21,7 @@ def model_data_files(p_name, m_name):
 
 setup(
     name=package_name,
-    version='0.0.0',
+    version='1.0.0',
     packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
@@ -52,10 +52,10 @@ setup(
     + model_data_files(package_name, 'coke_can_airobotbook'),
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='masutani',
-    maintainer_email='masutani@isc.osakac.ac.jp',
-    description='TODO: Package description',
-    license='TODO: License declaration',
+    maintainer='MASUTANI Yasuhiro',
+    maintainer_email='ai-robot-book@googlegroups.com',
+    description='Turtlebot2 model for AI Robot Book',
+    license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [

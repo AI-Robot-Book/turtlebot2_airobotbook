@@ -1,6 +1,17 @@
 # AIロボット入門のためのTurtlebot2モデル
 
+<img src="images/turtlebot2_crane_gazebo.png" width="45%">
+<img src="images/turtlebot2_crane_rviz.png" width="45%">
+
 ## 概要
+
+ROS2とPythonで作って学ぶAIロボット入門（出村・萩原・升谷・タン著，講談社）の成果を実証するためのモデルを提供します．
+
+- 構成要素
+  - 移動台車 Yujin Robot Kobuki（棚板付き）
+  - ロボットアーム アールティ CRANE+ V2
+  - 測域センサ 北陽電機 URG-04LX-UG01
+  - 深度カメラ Intel RealSense D435
 
 ## インストール
 
@@ -32,10 +43,11 @@ source install/setup.bash
 ```
 sudo cp ~/airobot_ws/src/turtlebot2_airobotbook/rules.d/* /etc/udev/rules.d
 ```
-KobukiとCRANE+ V2は同じFTDIのドライバを使っているので，個別の機器に合わせたルールの書き換えが必要．うまく設定できれば，以下のようなデバイスファイル（のシンボリックリンク）が作られる．
+KobukiとCRANE+ V2は同じFTDIのドライバを使っているので，個別のデバイスに合わせたルールの書き換えが必要．うまく設定できれば，以下のようなデバイスファイル（のシンボリックリンク）が作られる．
 
 - Kobuki → `/dev/ttyUSB_kobuki`
 - CRANE+ V2 → `/dev/ttyUSB_craneplus`
+- URG → `/dev/ttyACM_urg`
 
 ## 実行
 
@@ -69,4 +81,30 @@ ros2 launch turtlebot2_airobotbook turtlebot2_crane_gazebo.launch.py
 ros2 launch turtlebot2_airobotbook turtlebot2_crane_gazebo_rviz.launch.py 
 ```
 
+## ヘルプ
 
+- 実機を動かすための設定がまだ不十分です．
+- シミュレーションはIgnition Gazeboへ移行したいです．
+
+## 著者
+
+升谷 保博
+
+## 履歴
+
+- 2022-08-25: ライセンス・ドキュメントの整備
+- 2022-08-23: 公開
+
+## ライセンス
+
+Copyright (c) 2022, MASUTANI Yasuhiro  
+All rights reserved.  
+This project is licensed under the Apache License 2.0 license found in the LICENSE file in the root directory of this project.
+
+## 参考文献
+
+- [Kobuki: ROS2 runtime libraries, nodes and launchers for the Kobuki](https://github.com/kobuki-base/kobuki_ros)
+- [RT Corporation: CRANE+ V2 ROS 2 Packages ](https://github.com/rt-net/crane_plus)
+- [Intel® RealSense™: ROS Wrapper for Intel® RealSense™ Devices](https://github.com/IntelRealSense/realsense-ros)
+- [PAL Robotics S.L.: Intel RealSense Gazebo ROS plugin](https://github.com/pal-robotics/realsense_gazebo_plugin)
+- [ROS device drivers: ROS wrapper for the Hokuyo urg_c library](https://github.com/ros-drivers/urg_node)
