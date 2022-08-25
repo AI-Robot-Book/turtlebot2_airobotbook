@@ -1,4 +1,4 @@
-# AIロボット入門のためのTurtlebot2モデル
+# 「ROS2とPythonで作って学ぶAIロボット入門」のためのTurtlebot2モデル
 
 <img src="images/turtlebot2_crane_gazebo.png" width="45%">
 <img src="images/turtlebot2_crane_rviz.png" width="45%">
