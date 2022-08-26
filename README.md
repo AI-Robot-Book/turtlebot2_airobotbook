@@ -103,6 +103,8 @@ This project is licensed under the Apache License 2.0 license found in the LICEN
 
 ## 参考文献
 
+- [Open Source Robotics Foundation: TurtleBot2](https://www.turtlebot.com/turtlebot2/)
+- [turtlebot: The turtlebot stack provides all the basic drivers for running and using a TurtleBot.](https://github.com/turtlebot/turtlebot)
 - [Kobuki: ROS2 runtime libraries, nodes and launchers for the Kobuki](https://github.com/kobuki-base/kobuki_ros)
 - [RT Corporation: CRANE+ V2 ROS 2 Packages ](https://github.com/rt-net/crane_plus)
 - [Intel® RealSense™: ROS Wrapper for Intel® RealSense™ Devices](https://github.com/IntelRealSense/realsense-ros)
